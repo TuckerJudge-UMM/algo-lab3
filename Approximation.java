@@ -26,8 +26,8 @@ class Approximation {
                         System.out.println("poss sum: " + possSum);
                         if ((possSum) < (sum + arr[i])){
                             System.out.println("target - poss sum: " + (possSum) + "target - sum + arr[i]: " + (sum + arr[i]));
-                            int swap = bins[curr][currI];
-                            bins[curr][currI] = arr[i];
+                            int swap = bins[curr][currI-1];
+                            bins[curr][currI-1] = arr[i];
                             arr[i] = swap;
                         }
                     }
@@ -48,7 +48,7 @@ class Approximation {
         for(int i = 0; i<test.length;i++){
             for(int j = 0; j<test.length;j++){
                 if (test[i][j] == 0){continue;}
-                System.out.println("" +i+": "+ test[i][j]);
+                System.out.println("\n " +i+": "+ test[i][j]);
             }
         }
     }
