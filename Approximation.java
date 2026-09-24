@@ -11,7 +11,7 @@ class Approximation {
         }
         return target - (sum + val);
     }
-
+    // public loopPass(){}
     public int[][] firstPass(int [] arr, int target){
         // probs need a different method of collection
         int[][] bins = new int[3][arr.length];
@@ -29,7 +29,16 @@ class Approximation {
                 int sum = findNewSumOfCurrentBin(bins[curr], currI, arr[i], target);
                 System.out.print("sum: " + sum);
 
-                if(sum < 0) {
+                if(sum <= 0){
+                    if (sum != 0 && i < arr.length - 1){
+                        // or just one other item in the array
+                        int possSum = sum + bins[curr][currI-1];
+                        if ((possSum) < (sum + arr[i])){
+                            int swap = bins[curr][currI-1];
+                            bins[curr][currI-1] = arr[i];
+                            arr[i] = swap;
+                        }
+                    }
                     curr++;
                     currI = 0;
 
