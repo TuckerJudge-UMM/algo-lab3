@@ -6,14 +6,27 @@ class Approximation1 {
         int l = 0;
         int r = idxOfArray;
         int midpoint = 0;
+        // above domain and intentionally out of bounds
+        int closestPossible = target + 1;
+        int closestIdx = sourceArr.length;
         while(l <= r){
+            // have to do a little search here
             midpoint = l + (r-l) / 2;
+            System.out.println("" + l + " " + r);
             int midVal = sourceArr[midpoint];
-            if (midVal+localSum < target){ l = midpoint; }
-            else if (midVal+localSum > target){ r = midpoint; }
+            int sum = midVal + localSum;
+            int abs_sum = (sum < 0) ? -sum : sum;
+            if ((target - abs_sum) < closestPossible){
+                closestPossible = midVal;
+                closestIdx = midpoint;
+            }
+            System.out.println("" + (midVal+localSum < target));
+            if (midVal+localSum < target){ l = midpoint + 1; }
+            else if (midVal+localSum > target){ r = midpoint - 1; }
             else { return midpoint; }
         }
-        return midpoint;
+        // handle edge case in caller
+        return closestIdx;
     }
 
 
@@ -25,12 +38,14 @@ class Approximation1 {
         int[][] bins = new int[arr.length][target+1];
         int j = 0;
         int k = 0;
-        int sumOfSubArrIdx = target+1; 
+        int sumOfSubArrIdx = target; 
         for(int i = arr.length-1; i>=0; --i){
+            System.out.println("" + i);
             if(bins[j][k] != 0){
                 int sumPlusNewItem = arr[i] + bins[j][sumOfSubArrIdx];
                 if(sumPlusNewItem < target){
                     bins[j][k] = arr[i];
+                    k++;
                 } else if (sumPlusNewItem == target){
                     bins[j][k] = arr[i];
                     j++;
@@ -38,8 +53,14 @@ class Approximation1 {
                 } else if (sumPlusNewItem > target){
                     if (i == 0){ bins[i+1][0] = arr[i]; return bins; }
                     int closestVal = findClosestValue(bins[j][sumOfSubArrIdx], target, i, arr);
+                    if (closestVal == arr.length) {
+                        // honestly dont know?
+                        return bins;
+                    }
                     bins[j][k] = arr[closestVal];
                     arr[closestVal] = arr[i];
+                    j++;
+                    k++;
                     // destroying the array here...
                     // pretty sure i can fix it
                 }
