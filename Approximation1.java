@@ -26,7 +26,7 @@ class Approximation1 {
         int j = 0;
         int k = 0;
         int sumOfSubArrIdx = target+1; 
-        for(int i = arr.length; i>=0; --i){
+        for(int i = arr.length-1; i>=0; --i){
             if(bins[j][k] != 0){
                 int sumPlusNewItem = arr[i] + bins[j][sumOfSubArrIdx];
                 if(sumPlusNewItem < target){
@@ -61,7 +61,7 @@ class Approximation1 {
         MergeSort ms = new MergeSort();
         ms.sort(data, 0, data.length -1);
 
-        int[][] test = approx.firstPass(data, 20);
+        int[][] test = approx.putIntoBins(data, 20);
         int totalUnused = 0;
         for(int i = 0; i<test.length;i++){
             int used = 0;
