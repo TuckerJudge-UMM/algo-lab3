@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-class Approximation {
-    public Approximation(){}
+class tst{
+    public tst(){}
     // First pass
     // added a 'count' parameter to know how many real items there are
     public int findNewSumOfCurrentBin(int[] arr, int count, int val, int target){
@@ -19,7 +19,7 @@ class Approximation {
         int curr = 0;
         int currI = 0;
 
-        for(int i = 0; i<arr.length;i++){
+        for(int i = arr.length-1; i>=0;i--){
             // ADDED: if we've already run out of bins, everything from here is unpacked
             if (curr >= bins.length) {
                 System.out.println("UNPACKED: " + arr[i]);
@@ -31,7 +31,7 @@ class Approximation {
                 // System.out.print("sum: " + sum);
 
                 if(sum <= 0){
-                    if (sum != 0 && i < arr.length - 1){
+                    if (sum != 0 && i > 0){
                         // or just one other item in the array
                         int possSum = sum + bins[curr][currI-1];
                         if ((target - possSum) < (target - ( sum + arr[i]) ) ){
@@ -58,7 +58,7 @@ class Approximation {
        // Removed the swap-with-last-item logic because it compared mismatched values (leftover space vs. total item size) and always read from an empty array slot, so instead of improving the packing it was silently corrupting data (zeroing out items)
     public static void main(String [] args){
         Scanner s;
-        Approximation approx = new Approximation();
+        tst approx = new tst();
 
         s = new Scanner(System.in);
         System.out.println("first int is target, the rest are numbers of the set\npress any non int key or ctrl d to continue");

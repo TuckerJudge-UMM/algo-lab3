@@ -1,0 +1,16 @@
+Partners:
+    Tucker Judge & Max Matejka
+
+Clear instructions for how to run your code, especially if your code isn't a standard Java project 
+standard java for Approximations.java
+
+
+All your examples (as a separate file or in comments in your code files). This includes examples that produce an optimal solution and at least one example of data for which your program doesn't produce an optimal solution
+
+Optimally:
+    20 7 15 13 12 9 7 3 1
+    45 27 35 33 12 9 7 3 1
+Not Optimally:
+    20 8 12 4 8 15 9 3 1 10
+Efficiency analysis of your code. In particular, you need to clearly explain that your code has polynomial efficiency
+The merge sort is nlgn and the pass by function is O(nk) where n is the size of the input and k is the amount of bins. n^2klgn is in polynomial time and faster than the k^n most precise algorithm.
